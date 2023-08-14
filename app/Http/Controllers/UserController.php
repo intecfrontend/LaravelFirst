@@ -8,26 +8,25 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-public function showCorrectHomepage(){
-    if (auth()->check()) {
-        return 'you are logged in';
-} 
-else{
-return view('homepage');
+    public function logout(){
+        (auth()->logout()); return redirect('/')->with('success', 'You are now logged out');
+    }
+    public function showCorrectHomepage(){
+        if (auth()->check()) {
+            return view('homepage_feed');
+    } else {
+    return view('homepage');
+    }
 }
-}
-
-
-
  public function login(Request $request){
         $incomingFields = $request->validate([
             'loginusername' => 'required',
             'loginpassword' => 'required',
         ]);
         if (auth()->attempt(['username' => $incomingFields['loginusername'], 'password' => $incomingFields['loginpassword']])) {
-            $request->session()->regenerate(); return 'Congrats!';
+            $request->session()->regenerate(); return redirect('/')->with('success', 'You are now logged in');;
         } else {
-            return 'Sorry!';
+            return  redirect('/');
         } 
     }
     
