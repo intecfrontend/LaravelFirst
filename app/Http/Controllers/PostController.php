@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function viewSinglePost(Post $pis){
-        return $pis->title;
-        return view('single-post');
+    public function viewSinglePost(Post $post){
+        return view('single-post', ['post' => $post]);
+        //we are using the info inside the single-post blade
     }    
     public function storeNewPost(Request $request){
         $incomingFields = $request->validate(['title'=>'required', 'body'=>'required', ]); 
