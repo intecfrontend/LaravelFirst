@@ -5,13 +5,16 @@
         <h2>{{$post->title}}</h2>
 <!-- //** post has been used on PostController public function viewSinglePost(Post $post)
         return view('single-post', ['post' => $post]); and on the routetag on web.php and on blade {{$post->title}} -->
-
+@can('update', $post)
         <span class="pt-2">
           <a href="#" class="text-primary mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
-          <form class="delete-post-form d-inline" action="#" method="POST">
-            <button class="delete-post-button text-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
+          <form class="delete-post-form d-inline" action="/post/{{$post->id}}" method="POST">
+          @csrf  
+          @method('Delete') 
+          <button class="delete-post-button text-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
           </form>
         </span>
+        @endcan
       </div>
 
       <p class="text-muted small mb-4">

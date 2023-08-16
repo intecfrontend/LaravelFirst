@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     // interesant ivm de syntax
     public function profile(User $nameConnector){
-     return view('profile-posts', ['username' => $nameConnector->username, 'posts'=> $nameConnector->posts()->latest()->get()]);
+     return view('profile-posts', ['username' => $nameConnector->username, 'posts'=> $nameConnector->posts()->latest()->get(), 'postCount' => $nameConnector->posts()->count()]);
     }    
     public function logout(){
         (auth()->logout()); return redirect('/')->with('success', 'You are now logged out');

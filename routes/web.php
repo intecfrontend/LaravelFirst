@@ -23,6 +23,8 @@ Route::post('/logout', [UserController::class, "logout"])->middleware('auth');;
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('auth');
 Route::post('/create-post', [PostController::class, 'storeNewPost'])->middleware('auth');
 Route::get('/post/{post}', [PostController::class, 'viewSinglePost'])->middleware('auth');
+Route::delete('/post/{post}', [PostController::class, 'delete']);
+
 //viewSinglePost
 
 Route::get('/profile/{nameConnector:username}', [UserController::class, 'profile']);
