@@ -7,7 +7,7 @@
         return view('single-post', ['post' => $post]); and on the routetag on web.php and on blade {{$post->title}} -->
 @can('update', $post)
         <span class="pt-2">
-          <a href="#" class="text-primary mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
+          <a href="/post/{{$post->id}}/edit" class="text-primary mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
           <form class="delete-post-form d-inline" action="/post/{{$post->id}}" method="POST">
           @csrf  
           @method('Delete') 
