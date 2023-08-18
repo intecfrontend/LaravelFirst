@@ -14,6 +14,17 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+//lesson 34
+Route::get('/admins-only', function(){
+  if (Gate::allows('visitAdminPages')){
+    return 'Only admins should be able to see this page.';
+  }
+  return 'Only admins, not allowed to see this page.';
+});
+
 // User related routes
 Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 Route::post('/register', [UserController::class, "register"])->middleware('guest');;
@@ -24,7 +35,10 @@ Route::get('/create-post', [PostController::class, 'showCreateForm'])->middlewar
 Route::post('/create-post', [PostController::class, 'storeNewPost'])->middleware('auth');
 Route::get('/post/{post}', [PostController::class, 'viewSinglePost'])->middleware('auth');
 Route::delete('/post/{post}', [PostController::class, 'delete'])->middleware('can:delete,post');
+Route::get('/manage-avatar', [PostController::class, 'showAvatarForm']);
+
 Route::get('/post/{post}/edit', [PostController::class, 'showEditForm'])->middleware('can:update,post');
+
 Route::put('/post/{post}', [PostController::class, 'actuallyUpdate'])->middleware('can:update,post');
 
 //viewSinglePost
