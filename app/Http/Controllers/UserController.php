@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+// lesson 37 make a smaller jpg
 
 class UserController extends Controller
 {
     // interesant ivm de syntax
-    public function storeAvatar(){
-        return 'hellothere';
+    public function storeAvatar(Request $request){
+        $request->file('avatar')->store('public/avatars');
+$user = auth()->user();
+$filename = $user->id. '-' . uniqid() . '.jpg';
+       $imgData = Image::make($request->file('avatar'))->fit(200)->encode('jpg');
+       // composer require intervention/image    PHP reduces imgsize
+        // return 'hellothere';
+        Storage::put('public/avatars/'.$filename, $imgData );
+        $user->avatar = $filename;
+        $user->save();
        }
 
        public function showAvatarForm(){
