@@ -9,7 +9,11 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     // interesant ivm de syntax
-    public function showAvatarForm(){
+    public function storeAvatar(){
+        return 'hellothere';
+       }
+
+       public function showAvatarForm(){
         return view('avatar-form');
        }
        
