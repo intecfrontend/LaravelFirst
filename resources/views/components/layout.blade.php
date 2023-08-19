@@ -20,9 +20,26 @@
         <div class="flex-row my-3 my-md-0">
           <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-search"></i></a>
           <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-comment"></i></span>
-          <a href="/profile/{{auth()->user()->username}}" class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="/storage/avatars/{{auth()->user()->avatar}}" /></a>
+          <a href="/profile/{{auth()->user()->username}}" class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="{{auth()->user()->avatar}}" 
+          alt="avatar"/></a>
           <a class="btn btn-sm btn-success mr-2" href="/create-post">Create Post</a>
-          
+          <script>
+  // Check if the user is authenticated before displaying the alert
+  
+
+  // @auth
+  //   var userAvatar = "{{ auth()->user()->avatar }}";
+  //   // Display the avatar value in an alert
+  //   alert("User Avatar: " + userAvatar);
+  // @endauth
+</script>
+
+
+
+
+
+
+
           <form action="/logout" method="POST" class="d-inline">
             <button class="btn btn-sm btn-secondary">Sign Out</button>
             @csrf
