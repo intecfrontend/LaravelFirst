@@ -20,16 +20,22 @@ $filename = $user->id. '-' . uniqid() . '.jpg';
        // composer require intervention/image    PHP reduces imgsize
         // return 'hellothere';
         Storage::put('public/avatars/'.$filename, $imgData );
+        $oldAvatar = $user->avatar;
         $user->avatar = $filename;
         $user->save();
+if($oldAvatar != "/fallback-avatar.jpg"){
+    Storage::delete(str_replace("/storage/", "public", $oldAvatar));
+}
+return back()->with('success', 'congrats with the new avatar.');
+
        }
 
        public function showAvatarForm(){
         return view('avatar-form');
        }
-       
+    //    **seehim
        public function profile(User $nameConnector){
-        return view('profile-posts', ['username' => $nameConnector->username, 'posts'=> $nameConnector->posts()->latest()->get(), 'postCount' => $nameConnector->posts()->count()]);
+        return view('profile-posts', ['avatar' => $nameConnector->avatar,'username' => $nameConnector->username, 'posts'=> $nameConnector->posts()->latest()->get(), 'postCount' => $nameConnector->posts()->count()]);
        }
     public function logout(){
         (auth()->logout()); return redirect('/')->with('success', 'You are now logged out');
